@@ -14,6 +14,7 @@ router.get("/", userController.get_users);
 // get individual user
 router.get("/:id", userController.get_user);
 
+// update user info
 router.put("/user_info", userController.update_user_info);
 
 router.put("/user_about", userController.update_user_about);
