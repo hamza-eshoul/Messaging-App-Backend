@@ -11,7 +11,7 @@ const conversationRoutes = require("./routes/conversation");
 
 // initialize app and socket.io
 const io = new Server(server, {
-  cors: { origin: ["http://localhost:5173"] },
+  cors: { origin: ["https://messaging-app-project.onrender.com/"] },
 });
 
 app.use(cors());
