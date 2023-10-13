@@ -9,9 +9,9 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
 const conversationRoutes = require("./routes/conversation");
 
-// initialize
+// initialize app and socket.io
 const io = new Server(server, {
-  cors: { origin: ["https://messaging-app-project.onrender.com"] },
+  cors: { origin: ["http://localhost:5173"] },
 });
 
 app.use(cors());
@@ -23,8 +23,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use("/user", userRoutes);
 app.use("/conversation", conversationRoutes);
 
-// socketio logic
-
+// socket.io logic
 let users = [];
 
 const addUser = (userId, socketId) => {
@@ -48,19 +47,19 @@ io.on("connection", (socket) => {
     io.emit("getUsers", users);
   });
 
-  // send a get message
-  socket.on("sendMessage", (addedMessage) => {
-    const receiver_id = addedMessage.receiverId;
-
-    const user = getUser(receiver_id);
+  // send and get message
+  socket.on("sendMessage", ({ addedMessage, receiver, conversation }) => {
+    const receiverId = receiver._id;
+    const user = getUser(receiverId);
 
     if (user) {
-      io.to(user.socketId).emit("getMessage", addedMessage);
+      io.to(user.socketId).emit("getMessage", { addedMessage, conversation });
     }
   });
 
-  // when disconnect
+  // disconnection
   socket.on("disconnect", () => {
+    console.log("a user disconnected");
     removeUser(socket.id);
     io.emit("getUsers", users);
   });
