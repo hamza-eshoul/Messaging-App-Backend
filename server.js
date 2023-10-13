@@ -9,15 +9,14 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
 const conversationRoutes = require("./routes/conversation");
 
+// middleware functions
+app.use(cors());
+app.use(express.json({ limit: "50mb" }));
+
 // initialize app and socket.io
 const io = new Server(server, {
-  cors: { origin: ["https://messaging-app-project.onrender.com/"] },
+  cors: { origin: "*" },
 });
-
-app.use(cors());
-
-// middleware functions
-app.use(express.json({ limit: "50mb" }));
 
 // routes
 app.use("/user", userRoutes);
