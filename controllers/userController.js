@@ -95,11 +95,11 @@ exports.update_user_data = async (req, res) => {
 };
 
 exports.update_user_about = async (req, res) => {
-  const { user_id, aboutText } = req.body;
+  const { aboutText } = req.body;
 
   try {
     const updateUserInfo = await User.findByIdAndUpdate(
-      user_id,
+      req.user._id,
       {
         $set: {
           aboutUser: aboutText,

@@ -19,7 +19,7 @@ router.get("/:id", requireAuth, userController.get_user);
 
 router.put("/user_data", requireAuth, userController.update_user_data);
 
-router.put("/user_about", requireAuth, userController.update_user_about);
+router.put("/profile_about", requireAuth, userController.update_user_about);
 
 // update user image
 router.put(
