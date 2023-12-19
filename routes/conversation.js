@@ -10,12 +10,12 @@ router.use(requireAuth);
 router.get("/", conversationController.get_conversations);
 
 // get a conversation
-router.post("/", conversationController.get_conversation);
+router.get("/:user1_id/:user2_id", conversationController.get_conversation);
 
 // add message
-router.post("/add_message", conversationController.add_message);
+router.post("/message", conversationController.add_conversation_message);
 
 // delete message
-router.delete("/delete_message", conversationController.delete_message);
+router.delete("/message", conversationController.delete_conversation_message);
 
 module.exports = router;

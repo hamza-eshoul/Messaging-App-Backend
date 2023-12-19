@@ -19,8 +19,8 @@ const io = new Server(server, {
 });
 
 // routes
-app.use("/user", userRoutes);
-app.use("/conversation", conversationRoutes);
+app.use("/users", userRoutes);
+app.use("/conversations", conversationRoutes);
 
 // socket.io logic
 let users = [];
