@@ -10,7 +10,7 @@ router.use(requireAuth);
 router.get("/", conversationController.get_conversations);
 
 // get a conversation
-router.get("/:user1_id/:user2_id", conversationController.get_conversation);
+router.get("/:user2_id", conversationController.get_conversation);
 
 // add message
 router.post("/message", conversationController.add_conversation_message);
